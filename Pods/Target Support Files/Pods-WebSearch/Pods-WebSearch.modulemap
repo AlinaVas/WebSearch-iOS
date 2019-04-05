@@ -1,0 +1,6 @@
+framework module Pods_WebSearch {
+  umbrella header "Pods-WebSearch-umbrella.h"
+
+  export *
+  module * { export * }
+}

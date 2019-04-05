@@ -12,6 +12,7 @@
 		2C4553C422579CA9009BF7DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4553C222579CA9009BF7DA /* Main.storyboard */; };
 		2C4553C622579CA9009BF7DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4553C522579CA9009BF7DA /* Assets.xcassets */; };
 		2C4553C922579CA9009BF7DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4553C722579CA9009BF7DA /* LaunchScreen.storyboard */; };
+		5D9EE90A421E97751C0C282E /* Pods_WebSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C76F3F387B230F3F56AAE3 /* Pods_WebSearch.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,9 @@
 		2C4553C522579CA9009BF7DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C4553C822579CA9009BF7DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C4553CA22579CA9009BF7DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34C76F3F387B230F3F56AAE3 /* Pods_WebSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		761248FCA21A5E211B48924A /* Pods-WebSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebSearch.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebSearch/Pods-WebSearch.release.xcconfig"; sourceTree = "<group>"; };
+		7FFD29D84C86D1FF2F24799F /* Pods-WebSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebSearch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebSearch/Pods-WebSearch.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D9EE90A421E97751C0C282E /* Pods_WebSearch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04178CBEDA24560C591E110A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				34C76F3F387B230F3F56AAE3 /* Pods_WebSearch.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2C4553B222579CA9009BF7DA = {
 			isa = PBXGroup;
 			children = (
 				2C4553BD22579CA9009BF7DA /* WebSearch */,
 				2C4553BC22579CA9009BF7DA /* Products */,
+				898E51F96A10439F4DA3EAD2 /* Pods */,
+				04178CBEDA24560C591E110A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +79,15 @@
 			path = WebSearch;
 			sourceTree = "<group>";
 		};
+		898E51F96A10439F4DA3EAD2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7FFD29D84C86D1FF2F24799F /* Pods-WebSearch.debug.xcconfig */,
+				761248FCA21A5E211B48924A /* Pods-WebSearch.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C4553CD22579CA9009BF7DA /* Build configuration list for PBXNativeTarget "WebSearch" */;
 			buildPhases = (
+				C9F07BA50440419D91A05722 /* [CP] Check Pods Manifest.lock */,
 				2C4553B722579CA9009BF7DA /* Sources */,
 				2C4553B822579CA9009BF7DA /* Frameworks */,
 				2C4553B922579CA9009BF7DA /* Resources */,
+				C078F08FB56E7A1EDD04B453 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,6 +156,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C078F08FB56E7A1EDD04B453 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WebSearch/Pods-WebSearch-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WebSearch/Pods-WebSearch-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C9F07BA50440419D91A05722 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WebSearch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2C4553B722579CA9009BF7DA /* Sources */ = {
@@ -272,6 +345,7 @@
 		};
 		2C4553CE22579CA9009BF7DA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7FFD29D84C86D1FF2F24799F /* Pods-WebSearch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -286,6 +360,7 @@
 		};
 		2C4553CF22579CA9009BF7DA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 761248FCA21A5E211B48924A /* Pods-WebSearch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

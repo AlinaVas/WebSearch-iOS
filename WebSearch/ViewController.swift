@@ -7,18 +7,27 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController {
 
+    let startURL = "https://www.twilio.com/blog/2016/08/web-scraping-and-parsing.html-in-swift-with-kanna-and-alamofire.html"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        searchText()
+    }
+    
+    
+    func searchText() {
+        
+        
+        Alamofire.request(startURL).responseString { (response) in
+            print(response.result.value!)
+        }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
 
 }
