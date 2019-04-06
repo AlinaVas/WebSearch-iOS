@@ -1,5 +1,5 @@
 //
-//  WebPage.swift
+//  Result.swift
 //  WebSearch
 //
 //  Created by Alina Fesyk on 4/6/19.
@@ -8,10 +8,7 @@
 
 import Foundation
 
-struct WebPage {
-    var url: String
-    var containedWebPages: [WebPage] = []
-    var status: SearchStatus
+enum Result<Success, Failure: Error> {
+    case success(Success)
+    case failure(Failure)
 }
-
-

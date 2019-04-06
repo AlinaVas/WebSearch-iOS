@@ -17,6 +17,9 @@
 		7DC179622258BF7C003EB3B2 /* SearchStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC179612258BF7C003EB3B2 /* SearchStatus.swift */; };
 		7DC179642258C13B003EB3B2 /* WebSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC179632258C13B003EB3B2 /* WebSearchPresenter.swift */; };
 		7DC179662258C898003EB3B2 /* WebPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC179652258C898003EB3B2 /* WebPageTableViewCell.swift */; };
+		7DC179682258E3DA003EB3B2 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC179672258E3DA003EB3B2 /* CustomError.swift */; };
+		7DC1796A2258F743003EB3B2 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC179692258F742003EB3B2 /* APIManager.swift */; };
+		7DC1796C2258FCA1003EB3B2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC1796B2258FCA1003EB3B2 /* Result.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,9 @@
 		7DC179612258BF7C003EB3B2 /* SearchStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStatus.swift; sourceTree = "<group>"; };
 		7DC179632258C13B003EB3B2 /* WebSearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSearchPresenter.swift; sourceTree = "<group>"; };
 		7DC179652258C898003EB3B2 /* WebPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageTableViewCell.swift; sourceTree = "<group>"; };
+		7DC179672258E3DA003EB3B2 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
+		7DC179692258F742003EB3B2 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		7DC1796B2258FCA1003EB3B2 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		7FFD29D84C86D1FF2F24799F /* Pods-WebSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebSearch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebSearch/Pods-WebSearch.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,17 +84,60 @@
 			isa = PBXGroup;
 			children = (
 				2C4553BE22579CA9009BF7DA /* AppDelegate.swift */,
-				2C4553C022579CA9009BF7DA /* WebSearchViewController.swift */,
-				7DC179652258C898003EB3B2 /* WebPageTableViewCell.swift */,
-				7DC1795F2258BD4C003EB3B2 /* WebPage.swift */,
-				7DC179632258C13B003EB3B2 /* WebSearchPresenter.swift */,
+				7DC1797022590AB6003EB3B2 /* ViewController */,
+				7DC1796E22590A7E003EB3B2 /* Model */,
+				7DC1796F22590A8B003EB3B2 /* Presenter */,
+				7DC1796D22590A6E003EB3B2 /* Service */,
+				7DC1797122590AC5003EB3B2 /* View */,
 				2C4553C222579CA9009BF7DA /* Main.storyboard */,
-				7DC179612258BF7C003EB3B2 /* SearchStatus.swift */,
 				2C4553C522579CA9009BF7DA /* Assets.xcassets */,
 				2C4553C722579CA9009BF7DA /* LaunchScreen.storyboard */,
 				2C4553CA22579CA9009BF7DA /* Info.plist */,
 			);
 			path = WebSearch;
+			sourceTree = "<group>";
+		};
+		7DC1796D22590A6E003EB3B2 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				7DC179692258F742003EB3B2 /* APIManager.swift */,
+				7DC179612258BF7C003EB3B2 /* SearchStatus.swift */,
+				7DC179672258E3DA003EB3B2 /* CustomError.swift */,
+				7DC1796B2258FCA1003EB3B2 /* Result.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		7DC1796E22590A7E003EB3B2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7DC1795F2258BD4C003EB3B2 /* WebPage.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7DC1796F22590A8B003EB3B2 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				7DC179632258C13B003EB3B2 /* WebSearchPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		7DC1797022590AB6003EB3B2 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2C4553C022579CA9009BF7DA /* WebSearchViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		7DC1797122590AC5003EB3B2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7DC179652258C898003EB3B2 /* WebPageTableViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		898E51F96A10439F4DA3EAD2 /* Pods */ = {
@@ -223,6 +272,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DC1796C2258FCA1003EB3B2 /* Result.swift in Sources */,
+				7DC1796A2258F743003EB3B2 /* APIManager.swift in Sources */,
+				7DC179682258E3DA003EB3B2 /* CustomError.swift in Sources */,
 				7DC179642258C13B003EB3B2 /* WebSearchPresenter.swift in Sources */,
 				7DC179662258C898003EB3B2 /* WebPageTableViewCell.swift in Sources */,
 				2C4553C122579CA9009BF7DA /* WebSearchViewController.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  SearchStatus.swift
+//  WebPage.swift
 //  WebSearch
 //
 //  Created by Alina Fesyk on 4/6/19.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-enum SearchStatus {
-    case waiting
-    case loading
-    case found
-    case unfound
-    case error(String)
+struct WebPage {
+    var url: String
+    var containedLinks: [String] = []
+    var status: SearchStatus
 }
+
+
