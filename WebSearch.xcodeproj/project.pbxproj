@@ -8,23 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		2C4553BF22579CA9009BF7DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4553BE22579CA9009BF7DA /* AppDelegate.swift */; };
-		2C4553C122579CA9009BF7DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4553C022579CA9009BF7DA /* ViewController.swift */; };
+		2C4553C122579CA9009BF7DA /* WebSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4553C022579CA9009BF7DA /* WebSearchViewController.swift */; };
 		2C4553C422579CA9009BF7DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4553C222579CA9009BF7DA /* Main.storyboard */; };
 		2C4553C622579CA9009BF7DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4553C522579CA9009BF7DA /* Assets.xcassets */; };
 		2C4553C922579CA9009BF7DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4553C722579CA9009BF7DA /* LaunchScreen.storyboard */; };
 		5D9EE90A421E97751C0C282E /* Pods_WebSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C76F3F387B230F3F56AAE3 /* Pods_WebSearch.framework */; };
+		7DC179602258BD4C003EB3B2 /* WebPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC1795F2258BD4C003EB3B2 /* WebPage.swift */; };
+		7DC179622258BF7C003EB3B2 /* SearchStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC179612258BF7C003EB3B2 /* SearchStatus.swift */; };
+		7DC179642258C13B003EB3B2 /* WebSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC179632258C13B003EB3B2 /* WebSearchPresenter.swift */; };
+		7DC179662258C898003EB3B2 /* WebPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC179652258C898003EB3B2 /* WebPageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C4553BB22579CA9009BF7DA /* WebSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C4553BE22579CA9009BF7DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2C4553C022579CA9009BF7DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2C4553C022579CA9009BF7DA /* WebSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSearchViewController.swift; sourceTree = "<group>"; };
 		2C4553C322579CA9009BF7DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C4553C522579CA9009BF7DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C4553C822579CA9009BF7DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2C4553CA22579CA9009BF7DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34C76F3F387B230F3F56AAE3 /* Pods_WebSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WebSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		761248FCA21A5E211B48924A /* Pods-WebSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebSearch.release.xcconfig"; path = "Pods/Target Support Files/Pods-WebSearch/Pods-WebSearch.release.xcconfig"; sourceTree = "<group>"; };
+		7DC1795F2258BD4C003EB3B2 /* WebPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPage.swift; sourceTree = "<group>"; };
+		7DC179612258BF7C003EB3B2 /* SearchStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStatus.swift; sourceTree = "<group>"; };
+		7DC179632258C13B003EB3B2 /* WebSearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSearchPresenter.swift; sourceTree = "<group>"; };
+		7DC179652258C898003EB3B2 /* WebPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageTableViewCell.swift; sourceTree = "<group>"; };
 		7FFD29D84C86D1FF2F24799F /* Pods-WebSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebSearch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebSearch/Pods-WebSearch.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,8 +78,12 @@
 			isa = PBXGroup;
 			children = (
 				2C4553BE22579CA9009BF7DA /* AppDelegate.swift */,
-				2C4553C022579CA9009BF7DA /* ViewController.swift */,
+				2C4553C022579CA9009BF7DA /* WebSearchViewController.swift */,
+				7DC179652258C898003EB3B2 /* WebPageTableViewCell.swift */,
+				7DC1795F2258BD4C003EB3B2 /* WebPage.swift */,
+				7DC179632258C13B003EB3B2 /* WebSearchPresenter.swift */,
 				2C4553C222579CA9009BF7DA /* Main.storyboard */,
+				7DC179612258BF7C003EB3B2 /* SearchStatus.swift */,
 				2C4553C522579CA9009BF7DA /* Assets.xcassets */,
 				2C4553C722579CA9009BF7DA /* LaunchScreen.storyboard */,
 				2C4553CA22579CA9009BF7DA /* Info.plist */,
@@ -168,12 +180,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-WebSearch/Pods-WebSearch-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -209,8 +223,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C4553C122579CA9009BF7DA /* ViewController.swift in Sources */,
+				7DC179642258C13B003EB3B2 /* WebSearchPresenter.swift in Sources */,
+				7DC179662258C898003EB3B2 /* WebPageTableViewCell.swift in Sources */,
+				2C4553C122579CA9009BF7DA /* WebSearchViewController.swift in Sources */,
 				2C4553BF22579CA9009BF7DA /* AppDelegate.swift in Sources */,
+				7DC179602258BD4C003EB3B2 /* WebPage.swift in Sources */,
+				7DC179622258BF7C003EB3B2 /* SearchStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,4 +6,5 @@ target 'WebSearch' do
 
   # Pods for WebSearch
     pod 'Alamofire'
+	pod 'SwiftSoup'
 end
