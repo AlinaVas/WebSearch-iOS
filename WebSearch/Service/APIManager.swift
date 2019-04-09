@@ -63,13 +63,27 @@ class APIManager {
             
             // extracting all url addresses from current web page
             
-            urlsFoundOnPage = matches(for: regexURL, in: html)
+//            urlsFoundOnPage = matches(for: regexURL, in: html)
+            
+            let linkElements = try doc.select("a")
+            
+            for element in linkElements {
+                var href = try element.attr("href")
+                if (href.hasPrefix("http://") || href.hasPrefix("https://")) && !urlsFoundOnPage.contains(href) {
+                    if href.hasSuffix("/") {
+                        href = String(href.dropLast())
+                    }
+                    print(href)
+                    urlsFoundOnPage.append(href)
+                }
+            }
+            
         
         } catch {
             print(error.localizedDescription)
             webPageStatus = .error(error.localizedDescription)
         }
-        print("COUNT: ", urlsFoundOnPage.count)
+//        print("COUNT: ", urlsFoundOnPage.count)
         return (searchStatus: webPageStatus, links: urlsFoundOnPage)
     }
     

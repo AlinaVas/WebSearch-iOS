@@ -10,7 +10,7 @@ import Foundation
 
 class AsyncOperation: Operation {
     
-
+    
     enum State: String {
         case ready, executing, finished
         
@@ -29,11 +29,11 @@ class AsyncOperation: Operation {
             didChangeValue(forKey: state.keyPath)
         }
     }
-
+    
 }
 
 extension AsyncOperation {
-
+    
     override var isReady: Bool {
         return super.isReady && state == .ready
     }
@@ -61,7 +61,6 @@ extension AsyncOperation {
     
     override func cancel() {
         state = .finished
-}
-
-
+    }
+    
 }

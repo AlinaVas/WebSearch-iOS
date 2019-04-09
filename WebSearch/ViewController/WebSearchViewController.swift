@@ -70,7 +70,6 @@ extension WebSearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WebPageTableViewCell", for: indexPath) as! WebPageTableViewCell
         let (url, status) = presenter.getCellContent(at: indexPath.row)
-        print(url, status)
         cell.addressLabel.text = url
         cell.statusLabel.text = status
         return cell
