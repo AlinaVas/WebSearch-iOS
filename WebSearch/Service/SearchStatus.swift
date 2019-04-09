@@ -9,7 +9,7 @@
 import Foundation
 
 enum SearchStatus: CustomStringConvertible {
-    case waiting
+    case pending
     case loading
     case found
     case unfound
@@ -17,7 +17,7 @@ enum SearchStatus: CustomStringConvertible {
     
     var description: String {
         switch self {
-        case .waiting:
+        case .pending:
             return "in queue ☑︎☒☐"
         case .loading:
             return "loading"

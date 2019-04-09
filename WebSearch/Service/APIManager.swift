@@ -14,37 +14,29 @@ class APIManager {
     
     static let shared = APIManager()
     
-    let startURL = "https://www.twilio.com/blog/2016/08/web-scraping-and-parsing.html-in-swift-with-kanna-and-alamofire.html"
-    
-    private let regexURL = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
-    
-//    let searchString = "Now run the app and"
+    private let regexURL = "(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?"
     
     private init() {}
 
     
-    func loadWebPage(url: String, searchString: String, completion: @escaping (Result<WebPage, CustomError>) -> Void)  {
-        Alamofire.request(startURL).responseString { response in
+    func loadWebPage(url: String, searchString: String, completion: @escaping (WebPage) -> Void)  {
+        Alamofire.request(url).responseString { response in
             
             if let error = response.error {
-                completion(.failure(.custom(error.localizedDescription)))
-//                self.viewDelegate?.showAlert(msg: error.localizedDescription)
+                completion(WebPage(url: url, containedLinks: [], status: .error(error.localizedDescription)))
                 return
             }
             
             if let statusCode = response.response?.statusCode, statusCode != 200 {
-                completion(.failure(.networkError(statusCode)))
-//                self.viewDelegate?.showAlert(msg: "Network error: \(response.response?.statusCode ?? 0)")
+                completion(WebPage(url: url, containedLinks: [], status: .error("netwotk error: \(statusCode)")))
                 return
             }
             
             if let resultValue = response.result.value {
-//                completion(.success(resultValue))
                 let (webPageStatus, links) = self.parseHTML(html: resultValue, searchString: searchString)
-                completion(.success(WebPage(url: url, containedLinks: links, status: webPageStatus)))
+                completion(WebPage(url: url, containedLinks: links, status: webPageStatus))
             } else {
-                completion(.failure(.custom("no result value")))
-//                self.viewDelegate?.showAlert(msg: "Network error: no result value")
+                completion(WebPage(url: url, containedLinks: [], status: .error("no reault value")))
                 return
             }
         }
@@ -59,6 +51,8 @@ class APIManager {
             let bodyText = try doc.body()?.text()
             print(bodyText!)
             
+            // check if web page contains search string
+            
             if bodyText!.localizedCaseInsensitiveContains(searchString) {
                 print("Contains!")
                 webPageStatus = .found
@@ -67,27 +61,43 @@ class APIManager {
                 webPageStatus = .unfound
             }
             
-            //            if let elementsMatchingSearchString = try doc.body()?.getElementsContainingText(searchString) {
-            //                print("matches found: \(elementsMatchingSearchString.array().count)")
-            //
-            //                for element in elementsMatchingSearchString.array() {
-            //                    print(try element.text())
-            //                }
-            //            }
+            // extracting all url addresses from current web page
             
-            
-            
-            //            let linkElements: Elements = try doc.select("a[href]")
-            //
-            //            for link in linkElements {
-            //                print(try link.attr("href"))
-            //            }
-            
+            urlsFoundOnPage = matches(for: regexURL, in: html)
+        
         } catch {
             print(error.localizedDescription)
             webPageStatus = .error(error.localizedDescription)
         }
-        
+        print("COUNT: ", urlsFoundOnPage.count)
         return (searchStatus: webPageStatus, links: urlsFoundOnPage)
+    }
+    
+    func matches(for regex: String, in text: String) -> [String] {
+        var result: [String] = []
+        
+        do {
+            let type: NSTextCheckingResult.CheckingType = .link
+            let detector = try NSDataDetector(types: type.rawValue)
+            
+            let matches = detector.matches(in: text, options: .reportCompletion, range: NSRange(location: 0, length: text.utf16.count))
+            
+            for match in matches {
+                
+                guard let range = Range(match.range, in: text) else { continue }
+                let url = text[range]
+                if url.hasPrefix("https://") || url.hasPrefix("http://") {
+                    if url.rangeOfCharacter(from: CharacterSet(charactersIn: " ',><")) == nil {
+                        print(url)
+                        result.append(String(url))
+                    }
+                }
+                
+            }
+        } catch let error {
+            print("invalid regex: \(error.localizedDescription)")
+            return result
+        }
+        return result
     }
 }

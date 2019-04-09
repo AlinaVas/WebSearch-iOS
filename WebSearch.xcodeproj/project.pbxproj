@@ -20,6 +20,9 @@
 		7DC179682258E3DA003EB3B2 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC179672258E3DA003EB3B2 /* CustomError.swift */; };
 		7DC1796A2258F743003EB3B2 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC179692258F742003EB3B2 /* APIManager.swift */; };
 		7DC1796C2258FCA1003EB3B2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC1796B2258FCA1003EB3B2 /* Result.swift */; };
+		7DC17973225A676D003EB3B2 /* AsynchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC17972225A676D003EB3B2 /* AsynchOperation.swift */; };
+		7DC17975225B2EDC003EB3B2 /* LoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC17974225B2EDC003EB3B2 /* LoadOperation.swift */; };
+		7DC17977225B3CCB003EB3B2 /* ChangeStatusOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC17976225B3CCB003EB3B2 /* ChangeStatusOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +42,9 @@
 		7DC179672258E3DA003EB3B2 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		7DC179692258F742003EB3B2 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		7DC1796B2258FCA1003EB3B2 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		7DC17972225A676D003EB3B2 /* AsynchOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchOperation.swift; sourceTree = "<group>"; };
+		7DC17974225B2EDC003EB3B2 /* LoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOperation.swift; sourceTree = "<group>"; };
+		7DC17976225B3CCB003EB3B2 /* ChangeStatusOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeStatusOperation.swift; sourceTree = "<group>"; };
 		7FFD29D84C86D1FF2F24799F /* Pods-WebSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebSearch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebSearch/Pods-WebSearch.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,9 +107,12 @@
 			isa = PBXGroup;
 			children = (
 				7DC179692258F742003EB3B2 /* APIManager.swift */,
+				7DC17974225B2EDC003EB3B2 /* LoadOperation.swift */,
+				7DC17976225B3CCB003EB3B2 /* ChangeStatusOperation.swift */,
 				7DC179612258BF7C003EB3B2 /* SearchStatus.swift */,
 				7DC179672258E3DA003EB3B2 /* CustomError.swift */,
 				7DC1796B2258FCA1003EB3B2 /* Result.swift */,
+				7DC17972225A676D003EB3B2 /* AsynchOperation.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -281,6 +290,9 @@
 				2C4553BF22579CA9009BF7DA /* AppDelegate.swift in Sources */,
 				7DC179602258BD4C003EB3B2 /* WebPage.swift in Sources */,
 				7DC179622258BF7C003EB3B2 /* SearchStatus.swift in Sources */,
+				7DC17977225B3CCB003EB3B2 /* ChangeStatusOperation.swift in Sources */,
+				7DC17975225B2EDC003EB3B2 /* LoadOperation.swift in Sources */,
+				7DC17973225A676D003EB3B2 /* AsynchOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

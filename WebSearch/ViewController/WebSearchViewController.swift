@@ -54,7 +54,10 @@ class WebSearchViewController: UIViewController {
         numberOfThreadsTextField.layer.borderColor = (numberOfThreadsTextField.text! != "") ? UIColor.lightText.cgColor : UIColor.red.cgColor
         numberOfURLsTextField.layer.borderColor = (numberOfURLsTextField.text! != "") ? UIColor.lightText.cgColor : UIColor.red.cgColor
         
-        presenter.startSearching(string: searchStringTextField.text!, startingURL: startingURLTextField.text!, numberOfThreads: numberOfURLsTextField.text!, numberOfURLs: numberOfThreadsTextField.text!)
+        if presenter.isValidInput(searchString: searchStringTextField.text!, startingURL: startingURLTextField.text!, numberOfThreads: numberOfThreadsTextField.text!, numberOfURLs: numberOfURLsTextField.text!) {
+            presenter.startSearching()
+        }
+        
     }
 }
 
@@ -65,11 +68,12 @@ extension WebSearchViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WebPageTableViewCell") as! WebPageTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WebPageTableViewCell", for: indexPath) as! WebPageTableViewCell
         let (url, status) = presenter.getCellContent(at: indexPath.row)
+        print(url, status)
         cell.addressLabel.text = url
         cell.statusLabel.text = status
-        return UITableViewCell()
+        return cell
     }
 }
 
@@ -85,4 +89,6 @@ extension WebSearchViewController: WebSearchPresenterDelegate {
         self.present(alert, animated: true)
     }
 }
+
+//TODO: Textfield should return
 
