@@ -7,33 +7,42 @@
 //
 
 import Foundation
+import Alamofire
 
 class LoadOperation: AsyncOperation {
-    var input: WebPage
-    var output: WebPage?
-    var searchString: String
+    var url: String
+    var response: DataResponse<String>?
     
-    init(_ input: WebPage, searchString: String) {
-        self.input = input
-        self.searchString = searchString
+    init(_ url: String) {
+        self.url = url
         super.init()
     }
     
     override func main() {
-        APIManager.shared.loadWebPage(url: input.url, searchString: searchString) { [unowned self] webPage in
-                self.output = webPage
-                self.state = .finished
-            }
+        if self.isCancelled { return }
+//        APIManager.shared.loadWebPage(url: input.url, searchString: searchString) { [unowned self] webPage in
+//            self.output = webPage
+//            self.state = .finished
+//        }
+        
+        Alamofire.request(url).responseString { response in
+            if self.isCancelled { return }
+            
+            self.response = response
+            self.state = .finished
+        }
     }
 }
 
 
+
 // For passing webPage to ChangeStatus Operation
 
-protocol WebPagePass {
-    var webPage: WebPage { get }
-}
+//protocol WebPagePass {
+//    var webPage: WebPage { get }
+//}
+//
+//extension LoadOperation: WebPagePass {
+//    var webPage: WebPage { return output! }
+//}
 
-extension LoadOperation: WebPagePass {
-    var webPage: WebPage { return output! }
-}

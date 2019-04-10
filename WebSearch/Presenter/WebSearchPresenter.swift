@@ -109,40 +109,82 @@ class WebSearchPresenter {
             queue.loadingItems.append(currentWebPage)
             /////////////////////////////////////////////
             
-            let loadOperation = LoadOperation(currentWebPage, searchString: searchString)
-            
+            let loadOperation = LoadOperation(currentWebPage.url)
+            let parseOperation = ParseOperation(searchString: searchString)
             loadOperation.completionBlock = {
-                let webPage = loadOperation.output!
-                
-//                self.queue.serialOperationQueue.addOperation {
-                
-                    // add loaded url to processed and remove its duplicate from loading
-                    self.queue.loadingItems = self.queue.loadingItems.filter{$0.url != webPage.url}
-                    self.queue.addToProcessed(webPage)
+                parseOperation.response = loadOperation.response
+            }
+            parseOperation.completionBlock = { // weak self??
+                self.queue.serialOperationQueue.addOperation {
                     
-                    // add new urls to queue
-                    for urlString in webPage.containedLinks {
+                    // change status of current web page
+                    currentWebPage.status = parseOperation.searchStatus!
+                    
+                    // remove from loading
+                    if let index = self.queue.loadingItems.index(of: currentWebPage) {
+                        self.queue.loadingItems.remove(at: index)
+                    }
+                    
+                    // add to processed
+                    self.queue.addToProcessed(currentWebPage) // does it have a connection with currentWebPage?
+                    
+                    // add new URLs to pending
+                    for url in parseOperation.foundURLs {
+                        
                         //check if the limit of checked urls is not exceeded, otherwise break the loop
                         guard !self.queue.isFull() else { break }
-                        //check if this url is already in queue, otherwise skip the item
-                        guard !self.queue.allItems.contains(where: {$0.url == urlString}) else { continue }
                         
-                        self.queue.addToPending(WebPage(url: urlString, containedLinks: [], status: .pending))
+                        //check if this url is already in queue, otherwise skip the item
+                        guard !self.queue.allItems.contains(where: {$0.url == url}) else { continue }
+                        
+                        self.queue.addToPending(WebPage(url: url, containedLinks: [], status: .pending))
                     }
+                    
                     print("TOOOOOTTAAAALLL: \(self.queue.allItems.count) PENDING \(self.queue.pendingItems.count) LOADING \(self.queue.loadingItems.count)")
                     
                     // update UI
                     OperationQueue.main.addOperation {
                         self.viewDelegate?.reloadTable()
-                    
-                    
+                    }
                     // repeat searching process with new urls
-                    // TODO: check if it stops searching when pending is empty
                     self.startSearching()
                 }
-//                }
             }
-            queue.loadOperationQueue.addOperation(loadOperation)
+            parseOperation.addDependency(loadOperation)
+            queue.loadOperationQueue.addOperations([loadOperation, parseOperation], waitUntilFinished: false) // or true?
+                
+//            }
+//                let webPage = loadOperation.output!
+//
+//                self.queue.serialOperationQueue.addOperation {
+//
+//                    // add loaded url to processed and remove its duplicate from loading
+//                    self.queue.loadingItems = self.queue.loadingItems.filter{$0.url != webPage.url}
+//                    self.queue.addToProcessed(webPage)
+//
+//                    // add new urls to queue
+//                    for urlString in webPage.containedLinks {
+//                        //check if the limit of checked urls is not exceeded, otherwise break the loop
+//                        guard !self.queue.isFull() else { break }
+//                        //check if this url is already in queue, otherwise skip the item
+//                        guard !self.queue.allItems.contains(where: {$0.url == urlString}) else { continue }
+//
+//                        self.queue.addToPending(WebPage(url: urlString, containedLinks: [], status: .pending))
+//                    }
+//                    print("TOOOOOTTAAAALLL: \(self.queue.allItems.count) PENDING \(self.queue.pendingItems.count) LOADING \(self.queue.loadingItems.count)")
+//
+//                    // update UI
+//                    OperationQueue.main.addOperation {
+//                        self.viewDelegate?.reloadTable()
+//                    }
+//
+//                    // repeat searching process with new urls
+//                    // TODO: check if it stops searching when pending is empty
+//                    self.startSearching()
+////                }
+//                }
+//            }
+//            queue.loadOperationQueue.addOperation(loadOperation)
         }
         
     }

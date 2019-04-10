@@ -21,6 +21,7 @@ class APIManager {
     
     func loadWebPage(url: String, searchString: String, completion: @escaping (WebPage) -> Void)  {
         Alamofire.request(url).responseString { response in
+
             
             if let error = response.error {
                 completion(WebPage(url: url, containedLinks: [], status: .error(error.localizedDescription)))
@@ -47,6 +48,10 @@ class APIManager {
         var urlsFoundOnPage: [String] = []
         
         do {
+            
+            if Thread.isMainThread {
+                print("😇")
+            }
             let doc: Document = try SwiftSoup.parse(html)
             let bodyText = try doc.body()?.text()
             print(bodyText!)

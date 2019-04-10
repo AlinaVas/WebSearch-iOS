@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C443BD8225E16BA000777E3 /* ParseOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C443BD7225E16BA000777E3 /* ParseOperation.swift */; };
 		2C4553BF22579CA9009BF7DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4553BE22579CA9009BF7DA /* AppDelegate.swift */; };
 		2C4553C122579CA9009BF7DA /* WebSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4553C022579CA9009BF7DA /* WebSearchViewController.swift */; };
 		2C4553C422579CA9009BF7DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4553C222579CA9009BF7DA /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C443BD7225E16BA000777E3 /* ParseOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseOperation.swift; sourceTree = "<group>"; };
 		2C4553BB22579CA9009BF7DA /* WebSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C4553BE22579CA9009BF7DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C4553C022579CA9009BF7DA /* WebSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSearchViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			children = (
 				7DC179692258F742003EB3B2 /* APIManager.swift */,
 				7DC17974225B2EDC003EB3B2 /* LoadOperation.swift */,
+				2C443BD7225E16BA000777E3 /* ParseOperation.swift */,
 				7DC17976225B3CCB003EB3B2 /* ChangeStatusOperation.swift */,
 				7DC179612258BF7C003EB3B2 /* SearchStatus.swift */,
 				7DC179672258E3DA003EB3B2 /* CustomError.swift */,
@@ -233,16 +236,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-WebSearch/Pods-WebSearch-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
@@ -257,15 +256,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-WebSearch-checkManifestLockResult.txt",
 			);
@@ -286,6 +281,7 @@
 				7DC179682258E3DA003EB3B2 /* CustomError.swift in Sources */,
 				7DC179642258C13B003EB3B2 /* WebSearchPresenter.swift in Sources */,
 				7DC179662258C898003EB3B2 /* WebPageTableViewCell.swift in Sources */,
+				2C443BD8225E16BA000777E3 /* ParseOperation.swift in Sources */,
 				2C4553C122579CA9009BF7DA /* WebSearchViewController.swift in Sources */,
 				2C4553BF22579CA9009BF7DA /* AppDelegate.swift in Sources */,
 				7DC179602258BD4C003EB3B2 /* WebPage.swift in Sources */,
