@@ -100,7 +100,7 @@ class WebSearchPresenter {
     }
     
     func startSearching() {
-        
+        print("search.......")
         while let currentWebPage = queue.removeFromPending() {
             
             ///temporary kostyl, +1 to make Queue non-generic ///
@@ -113,6 +113,7 @@ class WebSearchPresenter {
             let parseOperation = ParseOperation(searchString: searchString)
             loadOperation.completionBlock = {
                 parseOperation.response = loadOperation.response
+                parseOperation.stopParsingURLs = self.queue.isFull()
             }
             parseOperation.completionBlock = { // weak self??
                 self.queue.serialOperationQueue.addOperation {

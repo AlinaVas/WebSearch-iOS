@@ -15,6 +15,7 @@ class ParseOperation: Operation {
     var response: DataResponse<String>?
     var searchStatus: SearchStatus?
     var foundURLs: [String] = []
+    var stopParsingURLs: Bool = false
     
     init(searchString: String) {
         self.searchString = searchString
@@ -34,7 +35,11 @@ class ParseOperation: Operation {
             return
         }
         
-        // TODO: when img url?
+        // check if content-type is appropriate
+        if let contentType = response?.response?.mimeType, contentType.hasPrefix("text") == false {
+            searchStatus = .error("url's content-type: \(contentType)")
+            return
+        }
         
         guard let html = response?.result.value else {
             searchStatus = .error("network error: no result value")
@@ -45,24 +50,20 @@ class ParseOperation: Operation {
         // Parse HTML response from URL
         
         do {
-            if Thread.isMainThread {
-                print("😇")
-            }
+
             let doc: Document = try SwiftSoup.parse(html)
             let bodyText = try doc.body()?.text()
-            print(bodyText!)
-            
+
             // check if web page contains search string
             
             if bodyText!.localizedCaseInsensitiveContains(searchString) {
-                print("Contains!")
                 searchStatus = .found
             } else {
-                print("dont contain")
                 searchStatus = .unfound
             }
             
             // extracting all URLs from current web page
+            if stopParsingURLs == true { return }
             
             let linkElements = try doc.select("a")
             
@@ -72,7 +73,6 @@ class ParseOperation: Operation {
                     if href.hasSuffix("/") {
                         href = String(href.dropLast())
                     }
-                    print(href)
                     foundURLs.append(href)
                 }
             }

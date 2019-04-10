@@ -20,10 +20,6 @@ class LoadOperation: AsyncOperation {
     
     override func main() {
         if self.isCancelled { return }
-//        APIManager.shared.loadWebPage(url: input.url, searchString: searchString) { [unowned self] webPage in
-//            self.output = webPage
-//            self.state = .finished
-//        }
         
         Alamofire.request(url).responseString { response in
             if self.isCancelled { return }

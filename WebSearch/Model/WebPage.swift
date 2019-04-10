@@ -10,12 +10,12 @@ import Foundation
 
 class WebPage: NSObject {
     var url: String
-    var containedLinks: [String] = []
+//    var containedLinks: [String] = []
     var status: SearchStatus
     
     init(url: String, containedLinks: [String] = [], status: SearchStatus = .pending) {
         self.url = url
-        self.containedLinks = containedLinks
+//        self.containedLinks = containedLinks
         self.status = status
         super.init()
     }

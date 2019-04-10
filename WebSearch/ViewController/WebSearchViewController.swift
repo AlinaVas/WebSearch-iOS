@@ -27,6 +27,8 @@ class WebSearchViewController: UIViewController {
     }
     
     func setView() {
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 40
         
         searchStringTextField.layer.borderWidth = 1
         searchStringTextField.layer.cornerRadius = 5
@@ -43,7 +45,6 @@ class WebSearchViewController: UIViewController {
         numberOfURLsTextField.layer.borderWidth = 1
         numberOfURLsTextField.layer.cornerRadius = 5
         numberOfURLsTextField.layer.borderColor = UIColor.lightText.cgColor
-        
         
     }
     
