@@ -13,7 +13,7 @@ import SwiftSoup
 class ParseOperation: Operation {
     let searchString: String
     var response: DataResponse<String>?
-    var searchStatus: SearchStatus?
+    var statusOfURL: URLStatus = .unchecked
     var foundURLs: [String] = []
     var stopParsingURLs: Bool = false
     
@@ -24,25 +24,27 @@ class ParseOperation: Operation {
     override func main() {
         if self.isCancelled { return }
         
-        
+        // check if error is present
         if let error = response?.error {
-            searchStatus = .error(error.localizedDescription)
+            statusOfURL = .error(error.localizedDescription)
             return
         }
         
+        // check if status is 'OK'
         if let statusCode = response?.response?.statusCode, statusCode != 200 {
-            searchStatus = .error("netwotk error: \(statusCode)")
+            statusOfURL = .error("netwotk error: \(statusCode)")
             return
         }
         
         // check if content-type is appropriate
         if let contentType = response?.response?.mimeType, contentType.hasPrefix("text") == false {
-            searchStatus = .error("url's content-type: \(contentType)")
+            statusOfURL = .error("error: url's content-type is \(contentType)")
             return
         }
         
+        // maek sure the result value is present
         guard let html = response?.result.value else {
-            searchStatus = .error("network error: no result value")
+            statusOfURL = .error("network error: no result value")
             return
         }
 
@@ -57,14 +59,15 @@ class ParseOperation: Operation {
             // check if web page contains search string
             
             if bodyText!.localizedCaseInsensitiveContains(searchString) {
-                searchStatus = .found
+                statusOfURL = .found
             } else {
-                searchStatus = .unfound
+                statusOfURL = .unfound
             }
             
-            // extracting all URLs from current web page
-            if stopParsingURLs == true { return }
             
+            // extracting all URLs from current web page
+            
+            if stopParsingURLs == true { return }
             let linkElements = try doc.select("a")
             
             for element in linkElements {
@@ -79,7 +82,7 @@ class ParseOperation: Operation {
             
         } catch {
             print(error.localizedDescription)
-            searchStatus = .error(error.localizedDescription)
+            statusOfURL = .error(error.localizedDescription)
         }
 
     }

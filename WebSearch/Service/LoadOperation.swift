@@ -29,16 +29,3 @@ class LoadOperation: AsyncOperation {
         }
     }
 }
-
-
-
-// For passing webPage to ChangeStatus Operation
-
-//protocol WebPagePass {
-//    var webPage: WebPage { get }
-//}
-//
-//extension LoadOperation: WebPagePass {
-//    var webPage: WebPage { return output! }
-//}
-

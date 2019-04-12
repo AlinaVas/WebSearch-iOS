@@ -8,16 +8,17 @@
 
 import Foundation
 
-enum CustomError: Error, CustomStringConvertible {
-    case networkError(Int)
-    case custom(String)
-    
-    var description: String {
-        switch self {
-        case .networkError(let statusCode):
-            return "Network error: \(statusCode)"
-        case .custom(let msg):
-            return "Error: \(msg)"
-        }
-    }
-}
+//enum CustomError: Error, CustomStringConvertible {
+//    case networkError(Int)
+//    case custom(String)
+//    
+//    var description: String {
+//        switch self {
+//        case .networkError(let statusCode):
+//            return "Network error: \(statusCode)"
+//        case .custom(let msg):
+//            return "Error: \(msg)"
+//        }
+//    }
+//}
+

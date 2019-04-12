@@ -10,17 +10,15 @@ import Foundation
 
 class WebPage: NSObject {
     var url: String
-//    var containedLinks: [String] = []
-    var status: SearchStatus
+    var status: URLStatus
     
-    init(url: String, containedLinks: [String] = [], status: SearchStatus = .pending) {
+    init(url: String, status: URLStatus = .unchecked) {
         self.url = url
-//        self.containedLinks = containedLinks
         self.status = status
-        super.init()
+//        super.init()
     }
     
-    func changeStatus(to newStatus: SearchStatus) {
+    func changeStatus(to newStatus: URLStatus) {
         self.status = newStatus
     }
     

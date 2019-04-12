@@ -29,31 +29,20 @@ class WebSearchViewController: UIViewController {
     func setView() {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 40
-        
-        searchStringTextField.layer.borderWidth = 1
-        searchStringTextField.layer.cornerRadius = 5
-        searchStringTextField.layer.borderColor = UIColor.lightText.cgColor
-        
-        startingURLTextField.layer.borderWidth = 1
-        startingURLTextField.layer.cornerRadius = 5
-        startingURLTextField.layer.borderColor = UIColor.lightText.cgColor
-        
-        numberOfThreadsTextField.layer.borderWidth = 1
-        numberOfThreadsTextField.layer.cornerRadius = 5
-        numberOfThreadsTextField.layer.borderColor = UIColor.lightText.cgColor
-        
-        numberOfURLsTextField.layer.borderWidth = 1
-        numberOfURLsTextField.layer.cornerRadius = 5
-        numberOfURLsTextField.layer.borderColor = UIColor.lightText.cgColor
-        
     }
+    
+    @IBAction func stopButtonPressed(_ sender: UIButton) {
+        presenter.stopSearching()
+    }
+    
+    @IBAction func pauseButtonPressed(_ sender: UIButton) {
+        presenter.pauseSearching()
+    }
+    
     
     @IBAction func startButtonPressed(_ sender: UIButton) {
         
-        searchStringTextField.layer.borderColor = (searchStringTextField.text! != "") ? UIColor.lightText.cgColor : UIColor.red.cgColor
-        startingURLTextField.layer.borderColor = (startingURLTextField.text! != "") ? UIColor.lightText.cgColor : UIColor.red.cgColor
-        numberOfThreadsTextField.layer.borderColor = (numberOfThreadsTextField.text! != "") ? UIColor.lightText.cgColor : UIColor.red.cgColor
-        numberOfURLsTextField.layer.borderColor = (numberOfURLsTextField.text! != "") ? UIColor.lightText.cgColor : UIColor.red.cgColor
+        // check if there's input in textFields
         
         if presenter.isValidInput(searchString: searchStringTextField.text!, startingURL: startingURLTextField.text!, numberOfThreads: numberOfThreadsTextField.text!, numberOfURLs: numberOfURLsTextField.text!) {
             presenter.startSearching()
