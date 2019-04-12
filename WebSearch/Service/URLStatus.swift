@@ -9,15 +9,16 @@
 import Foundation
 
 enum URLStatus: CustomStringConvertible {
-    case unchecked
+    case pending
     case loading
     case found
     case unfound
+    case unknown
     case error(String)
     
     var description: String {
         switch self {
-        case .unchecked:
+        case .pending:
             return ""
         case .loading:
             return "loading"
@@ -25,6 +26,8 @@ enum URLStatus: CustomStringConvertible {
             return "✅"
         case .unfound:
             return "❌"
+        case .unknown:
+            return "unknown"
         case .error(let msg):
             return "\(msg)"
         }

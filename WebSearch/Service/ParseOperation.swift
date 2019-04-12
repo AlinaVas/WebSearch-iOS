@@ -13,7 +13,7 @@ import SwiftSoup
 class ParseOperation: Operation {
     let searchString: String
     var response: DataResponse<String>?
-    var statusOfURL: URLStatus = .unchecked
+    var statusOfURL: URLStatus = .unknown
     var foundURLs: [String] = []
     var stopParsingURLs: Bool = false
     

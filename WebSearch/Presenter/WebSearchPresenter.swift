@@ -48,15 +48,13 @@ class Queue<Item: NSObject> {
     func removeFromPending() -> Item? {
         guard !self.pendingItems.isEmpty else { return nil }
         let item = pendingItems.removeFirst()
-//        loadingItems.append(item)
+        loadingItems.append(item)
         return item
     }
     
     func addToProcessed(_ item: Item) {
-        // is it really filtered?
         loadingItems = loadingItems.filter{$0 !== item}
         processedItems.append(item)
-
     }
     
     func isFull() -> Bool {
@@ -87,7 +85,6 @@ class WebSearchPresenter {
             }
         }
     }
-    
 
     func isValidInput(searchString: String, startingURL: String, numberOfThreads: String, numberOfURLs: String) -> Bool {
         
@@ -146,12 +143,12 @@ class WebSearchPresenter {
         while let currentWebPage = queue.removeFromPending() {
             
             ///temporary kostyl, +1 to make Queue non-generic ///
-            // add to loading
-            currentWebPage.status = .loading
-            queue.loadingItems.append(currentWebPage)
+            // change status to loading
+//            currentWebPage.status = .loading
+//            queue.loadingItems.append(currentWebPage)
             /////////////////////////////////////////////
             
-            let loadOperation = LoadOperation(currentWebPage.url)
+            let loadOperation = LoadOperation(currentWebPage)
             let parseOperation = ParseOperation(searchString: searchString)
             loadOperation.completionBlock = {
                 parseOperation.response = loadOperation.response
@@ -182,7 +179,7 @@ class WebSearchPresenter {
                         //check if this url is already in queue, otherwise skip the item
                         guard !self.queue.allItems.contains(where: {$0.url == url}) else { continue }
                         
-                        self.queue.addToPending(WebPage(url: url, status: .unchecked))
+                        self.queue.addToPending(WebPage(url: url, status: .pending))
                     }
                     
                     print("TOOOOOTTAAAALLL: \(self.queue.allItems.count) PENDING \(self.queue.pendingItems.count) LOADING \(self.queue.loadingItems.count) PROCESSED: \(self.queue.processedItems.count)")
@@ -208,7 +205,10 @@ class WebSearchPresenter {
             queue.initiateNewQueue(with: [WebPage(url: startingURL)])
             viewDelegate?.reloadTable()
         }
-        queue.loadOperationQueue.isSuspended = false
+        if queue.loadOperationQueue.isSuspended == true {
+            queue.loadOperationQueue.isSuspended = false
+            queue.serialOperationQueue.isSuspended = false
+        }
         searchStatus = .active
         loadPendingURLs()
     }
@@ -217,6 +217,7 @@ class WebSearchPresenter {
         if searchStatus == .active {
             print("PAUSED!🍔")
             queue.loadOperationQueue.isSuspended = true
+            queue.serialOperationQueue.isSuspended = true
             searchStatus = .paused
         }
     }
@@ -225,7 +226,8 @@ class WebSearchPresenter {
         if searchStatus == .active || searchStatus == .paused {
             print("STOPPED🤪")
             queue.loadOperationQueue.cancelAllOperations()
-            queue.loadOperationQueue.isSuspended = true
+//            queue.serialOperationQueue.cancelAllOperations()
+//            queue.loadOperationQueue.isSuspended = true
             searchStatus = .inactive
         }
     }

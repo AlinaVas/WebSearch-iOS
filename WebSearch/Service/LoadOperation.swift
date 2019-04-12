@@ -10,19 +10,30 @@ import Foundation
 import Alamofire
 
 class LoadOperation: AsyncOperation {
-    var url: String
+    var webPage: WebPage
     var response: DataResponse<String>?
     
-    init(_ url: String) {
-        self.url = url
+    init(_ webPage: WebPage) {
+        self.webPage = webPage
         super.init()
     }
     
     override func main() {
-        if self.isCancelled { return }
         
-        Alamofire.request(url).responseString { response in
-            if self.isCancelled { return }
+        // check if operation is not cancelled
+        if self.isCancelled {
+            webPage.status = .unknown
+            return
+        }
+        
+        // change status to loading
+        webPage.status = .loading
+        
+        Alamofire.request(webPage.url).responseString { response in
+            if self.isCancelled {
+                self.webPage.status = .unknown
+                return
+            }
             
             self.response = response
             self.state = .finished

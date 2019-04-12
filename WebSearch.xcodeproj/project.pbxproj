@@ -19,8 +19,6 @@
 		7DC179622258BF7C003EB3B2 /* URLStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC179612258BF7C003EB3B2 /* URLStatus.swift */; };
 		7DC179642258C13B003EB3B2 /* WebSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC179632258C13B003EB3B2 /* WebSearchPresenter.swift */; };
 		7DC179662258C898003EB3B2 /* WebPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC179652258C898003EB3B2 /* WebPageTableViewCell.swift */; };
-		7DC179682258E3DA003EB3B2 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC179672258E3DA003EB3B2 /* CustomError.swift */; };
-		7DC1796C2258FCA1003EB3B2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC1796B2258FCA1003EB3B2 /* Result.swift */; };
 		7DC17973225A676D003EB3B2 /* AsynchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC17972225A676D003EB3B2 /* AsynchOperation.swift */; };
 		7DC17975225B2EDC003EB3B2 /* LoadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC17974225B2EDC003EB3B2 /* LoadOperation.swift */; };
 /* End PBXBuildFile section */
@@ -41,8 +39,6 @@
 		7DC179612258BF7C003EB3B2 /* URLStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLStatus.swift; sourceTree = "<group>"; };
 		7DC179632258C13B003EB3B2 /* WebSearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSearchPresenter.swift; sourceTree = "<group>"; };
 		7DC179652258C898003EB3B2 /* WebPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageTableViewCell.swift; sourceTree = "<group>"; };
-		7DC179672258E3DA003EB3B2 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
-		7DC1796B2258FCA1003EB3B2 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		7DC17972225A676D003EB3B2 /* AsynchOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchOperation.swift; sourceTree = "<group>"; };
 		7DC17974225B2EDC003EB3B2 /* LoadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOperation.swift; sourceTree = "<group>"; };
 		7FFD29D84C86D1FF2F24799F /* Pods-WebSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WebSearch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WebSearch/Pods-WebSearch.debug.xcconfig"; sourceTree = "<group>"; };
@@ -110,8 +106,6 @@
 				2C443BD7225E16BA000777E3 /* ParseOperation.swift */,
 				7DC179612258BF7C003EB3B2 /* URLStatus.swift */,
 				2C2FF7D4225F51A200713716 /* SearchStatus.swift */,
-				7DC179672258E3DA003EB3B2 /* CustomError.swift */,
-				7DC1796B2258FCA1003EB3B2 /* Result.swift */,
 				7DC17972225A676D003EB3B2 /* AsynchOperation.swift */,
 			);
 			path = Service;
@@ -273,8 +267,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DC1796C2258FCA1003EB3B2 /* Result.swift in Sources */,
-				7DC179682258E3DA003EB3B2 /* CustomError.swift in Sources */,
 				7DC179642258C13B003EB3B2 /* WebSearchPresenter.swift in Sources */,
 				2C2FF7D5225F51A200713716 /* SearchStatus.swift in Sources */,
 				7DC179662258C898003EB3B2 /* WebPageTableViewCell.swift in Sources */,
