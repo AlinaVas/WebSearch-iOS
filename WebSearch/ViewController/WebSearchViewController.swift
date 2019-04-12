@@ -16,6 +16,7 @@ class WebSearchViewController: UIViewController {
     @IBOutlet weak var numberOfThreadsTextField: UITextField!
     @IBOutlet weak var numberOfURLsTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var progressBar: UIProgressView!
     
     let presenter = WebSearchPresenter()
     
@@ -29,6 +30,7 @@ class WebSearchViewController: UIViewController {
     func setView() {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 40
+        progressBar.progress = 0
     }
     
     @IBAction func stopButtonPressed(_ sender: UIButton) {
@@ -70,6 +72,12 @@ extension WebSearchViewController: WebSearchPresenterDelegate {
     
     func reloadTable() {
         tableView.reloadData()
+    }
+    
+    func updateProgressBar(with newValue: Float) {
+        UIView.animate(withDuration: 1) {
+            self.progressBar.setProgress(newValue, animated: true)
+        }
     }
     
     func showAlert(msg: String) {

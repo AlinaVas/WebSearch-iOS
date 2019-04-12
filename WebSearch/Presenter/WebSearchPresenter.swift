@@ -11,6 +11,7 @@ import Foundation
 protocol WebSearchPresenterDelegate: class {
     func reloadTable()
     func showAlert(msg: String)
+    func updateProgressBar(with newValue: Float)
 }
 
 class Queue<Item: NSObject> {
@@ -61,6 +62,10 @@ class Queue<Item: NSObject> {
     func isFull() -> Bool {
         return allItems.count >= maxNumberOfItems
     }
+    
+    func getProgress() -> Float {
+        return Float(processedItems.count) / Float(maxNumberOfItems)
+    }
 }
 
 class WebSearchPresenter {
@@ -74,6 +79,14 @@ class WebSearchPresenter {
     var startingURL = ""
     
     var searchStatus: SearchStatus = .inactive
+
+    var searchProgress: Float = 0 {
+        didSet {
+            OperationQueue.main.addOperation {
+                self.viewDelegate?.updateProgressBar(with: self.searchProgress)
+            }
+        }
+    }
     
 
     func isValidInput(searchString: String, startingURL: String, numberOfThreads: String, numberOfURLs: String) -> Bool {
@@ -116,8 +129,6 @@ class WebSearchPresenter {
         queue.loadOperationQueue.qualityOfService = .utility
         queue.serialOperationQueue.maxConcurrentOperationCount = 1
         
-//        queue.addToPending(WebPage(url: startingURL, containedLinks: [], status: .loading))
-//        viewDelegate?.reloadTable()
         return true
     }
     
@@ -126,8 +137,6 @@ class WebSearchPresenter {
         // stop searching process if all found URLs are processed
         
         if queue.pendingItems.isEmpty && queue.loadingItems.isEmpty {
-//            queue.processedItems = []
-//            searchStatus = .inactive
             stopSearching()
             return
         }
@@ -148,7 +157,7 @@ class WebSearchPresenter {
                 parseOperation.response = loadOperation.response
                 parseOperation.stopParsingURLs = self.queue.isFull()
             }
-            parseOperation.completionBlock = { // weak self??
+            parseOperation.completionBlock = {                 // weak self??
                 self.queue.serialOperationQueue.addOperation {
                     
                     // change status of current web page
@@ -160,7 +169,9 @@ class WebSearchPresenter {
                     }
                     
                     // add to processed
-                    self.queue.addToProcessed(currentWebPage) // does it have a connection with currentWebPage?
+                    self.queue.addToProcessed(currentWebPage)
+                    self.searchProgress = self.queue.getProgress()
+
                     
                     // add new URLs to pending
                     for url in parseOperation.foundURLs {
@@ -193,11 +204,9 @@ class WebSearchPresenter {
         if searchStatus == .active { return }
         
         if searchStatus == .inactive {
-            print("ACTIVATED👹")
+            print("STARTED👹")
             queue.initiateNewQueue(with: [WebPage(url: startingURL)])
             viewDelegate?.reloadTable()
-//            queue.loadingItems = []
-//            queue.processedItems = []
         }
         queue.loadOperationQueue.isSuspended = false
         searchStatus = .active
@@ -218,9 +227,6 @@ class WebSearchPresenter {
             queue.loadOperationQueue.cancelAllOperations()
             queue.loadOperationQueue.isSuspended = true
             searchStatus = .inactive
-//            queue.pendingItems = []
-//            queue.loadingItems = []
-//            queue.processedItems = []
         }
     }
 }
