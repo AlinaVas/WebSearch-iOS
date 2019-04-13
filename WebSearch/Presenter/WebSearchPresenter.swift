@@ -204,7 +204,7 @@ class WebSearchPresenter {
         if searchStatus == .inactive {
             queue.initiateNewQueue(with: [WebPage(url: startingURL)])
             viewDelegate?.reloadTable()
-            viewDelegate?.updateProgressBar(with: 0)
+            searchProgress = 0
         }
         if queue.loadOperationQueue.isSuspended == true {
             queue.loadOperationQueue.isSuspended = false
@@ -231,7 +231,7 @@ class WebSearchPresenter {
             queue.loadOperationQueue.cancelAllOperations()
             queue.serialOperationQueue.cancelAllOperations()
             searchStatus = .inactive
-            viewDelegate?.updateProgressBar(with: 1)
+            searchProgress = 1
         }
     }
 }
