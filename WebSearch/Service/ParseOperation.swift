@@ -13,7 +13,7 @@ import SwiftSoup
 class ParseOperation: Operation {
     let searchString: String
     var response: DataResponse<String>?
-    var statusOfURL: URLStatus = .unknown
+    var statusOfURL: URLStatus = .cancelled
     var foundURLs: [String] = []
     var stopParsingURLs: Bool = false
     
@@ -23,7 +23,7 @@ class ParseOperation: Operation {
     
     override func main() {
         if self.isCancelled {
-            statusOfURL = .unknown
+            statusOfURL = .cancelled
             return
         }
         
@@ -41,7 +41,7 @@ class ParseOperation: Operation {
         
         // check if content-type is appropriate
         if let contentType = response?.response?.mimeType, contentType.hasPrefix("text") == false {
-            statusOfURL = .error("error: url's content-type is \(contentType)")
+            statusOfURL = .error("url's content-type is \(contentType)")
             return
         }
         
@@ -52,7 +52,7 @@ class ParseOperation: Operation {
         }
 
         if self.isCancelled {
-            statusOfURL = .unknown
+            statusOfURL = .cancelled
             return
         }
         

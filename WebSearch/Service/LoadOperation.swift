@@ -22,7 +22,7 @@ class LoadOperation: AsyncOperation {
         
         // check if operation is not cancelled
         if self.isCancelled {
-            webPage.status = .unknown
+            webPage.status = .cancelled
             return
         }
         
@@ -31,7 +31,7 @@ class LoadOperation: AsyncOperation {
         
         Alamofire.request(webPage.url).responseString { response in
             if self.isCancelled {
-                self.webPage.status = .unknown
+                self.webPage.status = .cancelled
                 return
             }
             

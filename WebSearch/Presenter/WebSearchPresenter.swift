@@ -31,6 +31,7 @@ class Queue<Item: NSObject> {
     
     // all URLs for tableView dataSource
     var allItems: [Item] {
+//        print("SETTER: ",processedItems + loadingItems + pendingItems)
         return processedItems + loadingItems + pendingItems
     }
     
@@ -164,7 +165,7 @@ class WebSearchPresenter {
                     if let index = self.queue.loadingItems.index(of: currentWebPage) {
                         self.queue.loadingItems.remove(at: index)
                     }
-                    
+                    print("SURPRISE:🔥  those fragile moment when array might be empty ")
                     // add to processed
                     self.queue.addToProcessed(currentWebPage)
                     self.searchProgress = self.queue.getProgress()
@@ -239,10 +240,12 @@ class WebSearchPresenter {
 extension WebSearchPresenter {
     
     func getNumberOfRows() -> Int {
+        print("NOR: ",queue.allItems)
         return queue.allItems.underestimatedCount
     }
     
     func getCellContent(at index: Int) -> (url: String, status: String) {
+        print("CCA: ",queue.allItems)
         return (url: queue.allItems[index].url, status: queue.allItems[index].status.description)
     }
 }

@@ -13,7 +13,7 @@ enum URLStatus: CustomStringConvertible {
     case loading
     case found
     case unfound
-    case unknown
+    case cancelled
     case error(String)
     
     var description: String {
@@ -26,8 +26,8 @@ enum URLStatus: CustomStringConvertible {
             return "✅"
         case .unfound:
             return "❌"
-        case .unknown:
-            return "unknown"
+        case .cancelled:
+            return "cancelled"
         case .error(let msg):
             return "\(msg)"
         }
