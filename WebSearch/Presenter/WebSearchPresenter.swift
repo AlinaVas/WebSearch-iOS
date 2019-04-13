@@ -142,20 +142,20 @@ class WebSearchPresenter {
         
         while let currentWebPage = queue.removeFromPending() {
             
-            ///temporary kostyl, +1 to make Queue non-generic ///
-            // change status to loading
-//            currentWebPage.status = .loading
-//            queue.loadingItems.append(currentWebPage)
-            /////////////////////////////////////////////
-            
             let loadOperation = LoadOperation(currentWebPage)
             let parseOperation = ParseOperation(searchString: searchString)
             loadOperation.completionBlock = {
+                if loadOperation.isCancelled {
+                    return
+                }
                 parseOperation.response = loadOperation.response
                 parseOperation.stopParsingURLs = self.queue.isFull()
             }
             parseOperation.completionBlock = {                 // weak self??
                 self.queue.serialOperationQueue.addOperation {
+                    if parseOperation.isCancelled {
+                        return
+                    }
                     
                     // change status of current web page
                     currentWebPage.status = parseOperation.statusOfURL
@@ -200,17 +200,20 @@ class WebSearchPresenter {
     func startSearching() {
         if searchStatus == .active { return }
         
+        print("STARTED👹")
         if searchStatus == .inactive {
-            print("STARTED👹")
             queue.initiateNewQueue(with: [WebPage(url: startingURL)])
             viewDelegate?.reloadTable()
+            viewDelegate?.updateProgressBar(with: 0)
         }
         if queue.loadOperationQueue.isSuspended == true {
             queue.loadOperationQueue.isSuspended = false
             queue.serialOperationQueue.isSuspended = false
         }
         searchStatus = .active
-        loadPendingURLs()
+        queue.serialOperationQueue.addOperation {
+            self.loadPendingURLs()
+        }
     }
     
     func pauseSearching() {
@@ -226,9 +229,9 @@ class WebSearchPresenter {
         if searchStatus == .active || searchStatus == .paused {
             print("STOPPED🤪")
             queue.loadOperationQueue.cancelAllOperations()
-//            queue.serialOperationQueue.cancelAllOperations()
-//            queue.loadOperationQueue.isSuspended = true
+            queue.serialOperationQueue.cancelAllOperations()
             searchStatus = .inactive
+            viewDelegate?.updateProgressBar(with: 1)
         }
     }
 }

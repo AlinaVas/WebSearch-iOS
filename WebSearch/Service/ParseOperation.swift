@@ -22,7 +22,10 @@ class ParseOperation: Operation {
     }
     
     override func main() {
-        if self.isCancelled { return }
+        if self.isCancelled {
+            statusOfURL = .unknown
+            return
+        }
         
         // check if error is present
         if let error = response?.error {
@@ -48,6 +51,10 @@ class ParseOperation: Operation {
             return
         }
 
+        if self.isCancelled {
+            statusOfURL = .unknown
+            return
+        }
         
         // Parse HTML response from URL
         

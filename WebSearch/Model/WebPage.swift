@@ -12,7 +12,7 @@ class WebPage: NSObject {
     var url: String
     var status: URLStatus
     
-    init(url: String, status: URLStatus = .unknown) {
+    init(url: String, status: URLStatus = .pending) {
         self.url = url
         self.status = status
 //        super.init()
