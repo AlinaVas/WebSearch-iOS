@@ -8,8 +8,10 @@
 
 import Foundation
 
+// Statuses that show if application is searching, paused, or stopped.
+
 enum SearchStatus {
-    case active
-    case inactive
-    case paused
+  case active
+  case inactive
+  case paused
 }

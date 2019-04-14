@@ -8,84 +8,92 @@
 
 import UIKit
 
-
 class WebSearchViewController: UIViewController {
+  
+  @IBOutlet weak var searchStringTextField: UITextField!
+  @IBOutlet weak var startingURLTextField: UITextField!
+  @IBOutlet weak var numberOfThreadsTextField: UITextField!
+  @IBOutlet weak var numberOfURLsTextField: UITextField!
+  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var progressBar: UIProgressView!
+  
+  private let presenter = WebSearchPresenter()
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    setView()
+    presenter.viewDelegate = self
+  }
+  
+  private func setView() {
+    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.estimatedRowHeight = 40
+    progressBar.progress = 0
+  }
+  
+  @IBAction func stopButtonPressed(_ sender: UIButton) {
+    presenter.stopSearching()
+  }
+  
+  @IBAction func pauseButtonPressed(_ sender: UIButton) {
+    presenter.pauseSearching()
+  }
+  
+  
+  @IBAction func startButtonPressed(_ sender: UIButton) {
+    
+    // check if there's input in textFields
+    
+    if presenter.isValidInput(searchString: searchStringTextField.text!, startingURL: startingURLTextField.text!, numberOfThreads: numberOfThreadsTextField.text!, numberOfURLs: numberOfURLsTextField.text!) {
+      presenter.startSearching()
+    }
+    
+  }
+}
 
-    @IBOutlet weak var searchStringTextField: UITextField!
-    @IBOutlet weak var startingURLTextField: UITextField!
-    @IBOutlet weak var numberOfThreadsTextField: UITextField!
-    @IBOutlet weak var numberOfURLsTextField: UITextField!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var progressBar: UIProgressView!
-    
-    let presenter = WebSearchPresenter()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setView()
-        presenter.viewDelegate = self
+
+
+
+extension WebSearchViewController: WebSearchPresenterDelegate {
+  
+  func reloadTable() {
+    tableView.reloadData()
+  }
+  
+  func updateProgressBar(with newValue: Float) {
+    UIView.animate(withDuration: 1) {
+      self.progressBar.setProgress(newValue, animated: true)
     }
-    
-    func setView() {
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 40
-        progressBar.progress = 0
-    }
-    
-    @IBAction func stopButtonPressed(_ sender: UIButton) {
-        presenter.stopSearching()
-    }
-    
-    @IBAction func pauseButtonPressed(_ sender: UIButton) {
-        presenter.pauseSearching()
-    }
-    
-    
-    @IBAction func startButtonPressed(_ sender: UIButton) {
-        
-        // check if there's input in textFields
-        
-        if presenter.isValidInput(searchString: searchStringTextField.text!, startingURL: startingURLTextField.text!, numberOfThreads: numberOfThreadsTextField.text!, numberOfURLs: numberOfURLsTextField.text!) {
-            presenter.startSearching()
-        }
-        
-    }
+  }
+  
+  func showAlert(msg: String) {
+    let alert = UIAlertController(title: "Oops!", message: msg, preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+    self.present(alert, animated: true)
+  }
 }
 
 extension WebSearchViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.getNumberOfRows()
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WebPageTableViewCell", for: indexPath) as! WebPageTableViewCell
-        let (url, status) = presenter.getCellContent(at: indexPath.row)
-        cell.addressLabel.text = url
-        cell.statusLabel.text = status
-        return cell
-    }
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return presenter.getNumberOfRows()
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "WebPageTableViewCell", for: indexPath) as! WebPageTableViewCell
+    let (url, status) = presenter.getCellContent(at: indexPath.row)
+    cell.addressLabel.text = url
+    cell.statusLabel.text = status
+    return cell
+  }
 }
 
-extension WebSearchViewController: WebSearchPresenterDelegate {
-    
-    func reloadTable() {
-        tableView.reloadData()
-    }
-    
-    func updateProgressBar(with newValue: Float) {
-        UIView.animate(withDuration: 1) {
-            self.progressBar.setProgress(newValue, animated: true)
-        }
-    }
-    
-    func showAlert(msg: String) {
-        let alert = UIAlertController(title: "Oops!", message: msg, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true)
-    }
+extension WebSearchViewController: UITextFieldDelegate {
+  
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
+  }
 }
 
-//TODO: Textfield should return
 

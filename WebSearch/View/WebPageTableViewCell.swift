@@ -9,17 +9,6 @@
 import UIKit
 
 class WebPageTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var statusLabel: UILabel! {
-        willSet {
-            if newValue.text!.hasPrefix("error") {
-                newValue.textColor = UIColor.red
-            } else {
-                newValue.textColor = UIColor.gray
-            }
-            setNeedsLayout()
-        }
-    }
-    
+  @IBOutlet weak var addressLabel: UILabel!
+  @IBOutlet weak var statusLabel: UILabel!
 }

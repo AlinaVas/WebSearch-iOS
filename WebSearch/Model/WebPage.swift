@@ -8,23 +8,20 @@
 
 import Foundation
 
-class WebPage: NSObject {
-    var url: String
-    var status: URLStatus
-    
-    init(url: String, status: URLStatus = .pending) {
-        self.url = url
-        self.status = status
-//        super.init()
-    }
-    
-    func changeStatus(to newStatus: URLStatus) {
-        self.status = newStatus
-    }
-    
-    static func == (lhs: WebPage, rhs: WebPage) -> Bool {
-        return lhs.url == rhs.url
-    }
+class WebPage {
+  var url: String
+  var status: URLStatus
+  var index: Int
+  
+  init(url: String, status: URLStatus = .pending, index: Int) {
+    self.url = url
+    self.status = status
+    self.index = index
+  }
+  
+  static func == (lhs: WebPage, rhs: WebPage) -> Bool {
+    return lhs.url == rhs.url
+  }
 }
 
 
