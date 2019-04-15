@@ -56,7 +56,7 @@ class WebSearchPresenter {
     
     // check if starting URL has a good format
     
-    guard let _ = URL(string: startingURL) else {
+    guard let _ = URL(string: startingURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) else {
       viewDelegate?.showAlert(msg: "Bad url")
       return false
     }
@@ -169,7 +169,7 @@ class WebSearchPresenter {
   func startSearching() {
     if searchStatus == .active { return }
     
-    print("STARTED ▶️")
+    print("▶️▶️▶️ STARTED ▶️▶️▶️")
     if searchStatus == .inactive {
       queue.initiateNewQueue(with: [WebPage(url: startingURL, index: queue.items.count)])
       viewDelegate?.reloadTable()
@@ -190,7 +190,7 @@ class WebSearchPresenter {
   
   func pauseSearching() {
     if searchStatus == .active {
-      print("PAUSED ⏸")
+      print("⏸⏸⏸ PAUSED ⏸⏸⏸")
       queue.loadOperationQueue.isSuspended = true
       queue.serialOperationQueue.isSuspended = true
       searchStatus = .paused
@@ -202,7 +202,7 @@ class WebSearchPresenter {
   
   func stopSearching() {
     if searchStatus == .active || searchStatus == .paused {
-      print("STOPPED ⏹")
+      print("⏹⏹⏹ STOPPED ⏹⏹⏹")
       queue.loadOperationQueue.cancelAllOperations()
       queue.serialOperationQueue.cancelAllOperations()
       searchStatus = .inactive

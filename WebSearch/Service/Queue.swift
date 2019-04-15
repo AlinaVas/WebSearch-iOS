@@ -45,7 +45,7 @@ class Queue {
   // adds a new item to a sequence of URLs (items)
   
   func addNewItem(_ item: WebPage) {
-    guard items.count < maxNumberOfItems else {return}
+    guard items.count < maxNumberOfItems else { return }
     items.append(item)
     pendingItemsCount += 1
   }
